@@ -1,0 +1,39 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+#endif
+
+//调试开关，发布前把这个宏定义为0，1代表开启调试，0代表关闭调试
+#define GIFTBOX_DEBUG 1
+
+//---------------------------------------------------------------- SHOW_LOG
+#define SHOW_LOG
+#ifdef  SHOW_LOG
+#define KT_DLog(fmt, ...) NSLog((@"%s[Line %d]->" fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#define KT_DLOG_SELECTOR    KT_DLog(@"%@",NSStringFromSelector(_cmd))
+#else
+#define KT_DLog(...)
+#endif
+/*
+ *  System Versioning Preprocessor Macros
+ */
+
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
